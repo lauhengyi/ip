@@ -11,20 +11,18 @@ public class TaskList {
         Message.send("Got it! I've added this task:\n" + task);
     }
 
-    public void mark(int index) {
+    public void mark(int index) throws LauraException {
         if (index > this.list.size() || index < 1) {
-            Message.send("Sorry, that task does not exist!");
-            return;
+            throw new LauraException("Sorry, that task does not exist!");
         }
         Task curr = this.list.get(index - 1);
         curr.mark();
         Message.send("Nice! I've marked this task as done:\n" + curr);
     }
 
-    public void unmark(int index) {
+    public void unmark(int index) throws LauraException {
         if (index > this.list.size() || index < 1) {
-            Message.send("Sorry, that task does not exist!");
-            return;
+            throw new LauraException("Sorry, that task does not exist!");
         }
         Task curr = this.list.get(index - 1);
         curr.unmark();
