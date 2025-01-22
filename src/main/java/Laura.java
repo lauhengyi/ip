@@ -10,7 +10,7 @@ public class Laura{
                        "What can I do for you?"
         );
 
-        ArrayList<String> list = new ArrayList<>();
+        TaskList taskList= new TaskList();
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine();
@@ -19,14 +19,9 @@ public class Laura{
                 break;
             }
             if (input.equals("list")) {
-                StringBuilder message = new StringBuilder();
-                for (int i = 0; i < list.size(); i++) {
-                    message.append(i + 1).append(". ").append(list.get(i)).append("\n");
-                }
-                Message.send(message.toString());
+                Message.send(taskList.toString());
             } else {
-                list.add(input);
-                Message.send("Added: " + input);
+                taskList.add(input);
             }
         }
 

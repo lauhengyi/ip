@@ -17,6 +17,6 @@ public class Task {
     @Override
     public String toString() {
         String symbol = isDone ? "[X]" : "[ ]";
-        return symbol + this.description;
+        return symbol + " " + this.description;
     }
 }
