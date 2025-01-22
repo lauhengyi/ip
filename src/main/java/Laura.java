@@ -20,6 +20,24 @@ public class Laura{
             }
             if (input.equals("list")) {
                 Message.send(taskList.toString());
+            } else if (input.startsWith("mark ")) {
+                int index;
+                try {
+                    index = Integer.parseInt(input.substring(5));
+                }
+                catch (NumberFormatException e) {
+                    index = -1;
+                }
+                taskList.mark(index);
+            } else if (input.startsWith("unmark ")) {
+                int index;
+                try {
+                    index = Integer.parseInt(input.substring(7));
+                }
+                catch (NumberFormatException e) {
+                    index = -1;
+                }
+                taskList.unmark(index);
             } else {
                 taskList.add(input);
             }
