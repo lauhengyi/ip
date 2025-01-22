@@ -6,8 +6,7 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
-    public void add(String description) {
-        Task task = new Task(description);
+    public void add(Task task) {
         this.list.add(task);
         Message.send("Got it! I've added this task:\n" + task);
     }
