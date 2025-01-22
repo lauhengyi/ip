@@ -57,6 +57,10 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
+Sorry, that task does not exist!
+____________________________________________________________
+
+____________________________________________________________
 Got it! I've added this task:
 [T][ ] clean up the trash
 ____________________________________________________________
@@ -145,5 +149,47 @@ ____________________________________________________________
 6. [E][ ] National Librarian's day celebration (from: 18 june 2pm to: 8pm)
 7. [E][ ] The colors of the rainbow reading (from: 19 june 2025 to: 19 july 2025)
 8. [D][ ] horror movie catalog (by: today)
+
+____________________________________________________________
+
+____________________________________________________________
+Sorry, that task does not exist!
+____________________________________________________________
+
+____________________________________________________________
+Noted. I've removed this task:
+[T][ ] help the librarian out
+Now you have 7 in this list.
+____________________________________________________________
+
+____________________________________________________________
+1. [T][X] borrow book
+2. [D][ ] deal with the loud noise problem (by: Sunday noon)
+3. [E][ ] The great gatsby reading (from: 29 june 2025 to: 12 july 2025)
+4. [T][ ] clean up the trash
+5. [E][ ] National Librarian's day celebration (from: 18 june 2pm to: 8pm)
+6. [E][ ] The colors of the rainbow reading (from: 19 june 2025 to: 19 july 2025)
+7. [D][ ] horror movie catalog (by: today)
+
+____________________________________________________________
+
+____________________________________________________________
+Noted. I've removed this task:
+[T][X] borrow book
+Now you have 6 in this list.
+____________________________________________________________
+
+____________________________________________________________
+Noted. I've removed this task:
+[E][ ] National Librarian's day celebration (from: 18 june 2pm to: 8pm)
+Now you have 5 in this list.
+____________________________________________________________
+
+____________________________________________________________
+1. [D][ ] deal with the loud noise problem (by: Sunday noon)
+2. [E][ ] The great gatsby reading (from: 29 june 2025 to: 12 july 2025)
+3. [T][ ] clean up the trash
+4. [E][ ] The colors of the rainbow reading (from: 19 june 2025 to: 19 july 2025)
+5. [D][ ] horror movie catalog (by: today)
 
 ____________________________________________________________
