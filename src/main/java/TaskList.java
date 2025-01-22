@@ -11,6 +11,16 @@ public class TaskList {
         Message.send("Got it! I've added this task:\n" + task);
     }
 
+    public void delete(int index) throws LauraException {
+        if (index > this.list.size() || index < 1) {
+            throw new LauraException("Sorry, that task does not exist!");
+        }
+        Task removed = this.list.remove(index - 1);
+        Message.send("Noted. I've removed this task:\n"
+                + removed +
+                "\nNow you have " + this.list.size() + " in this list.");
+    }
+
     public void mark(int index) throws LauraException {
         if (index > this.list.size() || index < 1) {
             throw new LauraException("Sorry, that task does not exist!");

@@ -7,6 +7,7 @@ list
 mark 2
 mark 3
 list
+mark 10
 todo clean up the trash
 list
 unmark 3
@@ -21,4 +22,10 @@ event The colors of the rainbow reading /to 12 july 2025
 event The colors of the rainbow reading /from 19 june 2025 /to 19 july 2025
 deadline horror movie catalog
 deadline horror movie catalog /by today
+list
+remove 10
+remove 2
+list
+remove 1
+remove 4
 list

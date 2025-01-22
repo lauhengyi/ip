@@ -57,6 +57,14 @@ public class Laura{
             String to = timing.substring(tI + 5);
 
             taskList.add(new EventTask(description, from, to));
+        } else if (input.startsWith("remove ")) {
+            int index;
+            try {
+                index = Integer.parseInt(input.substring(7));
+            } catch (NumberFormatException e) {
+                index = -1;
+            }
+            taskList.delete(index);
         } else if (input.startsWith("mark ")) {
             int index;
             try {
