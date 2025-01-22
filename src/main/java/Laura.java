@@ -12,7 +12,7 @@ public class Laura{
 
         TaskList taskList= new TaskList();
         Scanner scanner = new Scanner(System.in);
-        while (true) {
+        while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
                 Message.send("Bye. Hope to see you again soon!");

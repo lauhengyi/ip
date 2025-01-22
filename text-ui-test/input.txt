@@ -1,0 +1,17 @@
+todo borrow book
+todo help the librarian out
+list
+deadline deal with the loud noise problem /by Sunday noon
+event The great gatsby reading /from 29 june 2025 /to 12 july 2025
+list
+mark 2
+mark 3
+list
+todo clean up the trash
+list
+unmark 3
+event National Librarian's day celebration /from 18 june 2pm /to 8pm
+list
+mark 1
+unmark 2
+list
