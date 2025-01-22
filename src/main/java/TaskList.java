@@ -7,8 +7,9 @@ public class TaskList {
     }
 
     public void add(String description) {
-        this.list.add(new Task(description));
-        Message.send("Added: " + description);
+        Task task = new Task(description);
+        this.list.add(task);
+        Message.send("Got it! I've added this task:\n" + task);
     }
 
     public void mark(int index) {
