@@ -1,22 +1,22 @@
 public class EventTask extends Task {
-    final String from;
-    final String to;
+    final Date from;
+    final Date to;
 
-    public EventTask(String description, String from, String to) {
+    public EventTask(String description, String from, String to) throws LauraException {
         super(description);
-        this.from = from;
-        this.to = to;
+        this.from = new Date(from);
+        this.to = new Date(to);
     }
 
-    public EventTask(boolean isDone, String description, String from, String to) {
+    public EventTask(boolean isDone, String description, String from, String to) throws LauraException {
         super(isDone, description);
-        this.from = from;
-        this.to = to;
+        this.from = new Date(from);
+        this.to = new Date(to);
     }
 
     @Override
     public String encode() {
-        return "E|" + super.encode() + "|" + this.from + "|" + this.to;
+        return "E|" + super.encode() + "|" + this.from.encode() + "|" + this.to.encode();
     }
 
     @Override

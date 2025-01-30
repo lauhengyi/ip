@@ -1,18 +1,21 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 public class DeadlineTask extends Task {
-    private final String deadline;
-    public DeadlineTask(String description, String deadline) {
+    private final Date deadline;
+    public DeadlineTask(String description, String deadline) throws LauraException{
         super(description);
-        this.deadline = deadline;
+        this.deadline = new Date(deadline);
     }
 
-    public DeadlineTask(boolean isDone, String description, String deadline) {
+    public DeadlineTask(boolean isDone, String description, String deadline) throws LauraException{
         super(isDone, description);
-        this.deadline = deadline;
+        this.deadline = new Date(deadline);
     }
 
     @Override
     public String encode() {
-        return "D|" + super.encode() + "|" + this.deadline;
+        return "D|" + super.encode() + "|" + this.deadline.encode();
     }
 
     @Override

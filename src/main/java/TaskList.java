@@ -25,7 +25,7 @@ public class TaskList {
         }
     }
 
-    public Task decode(String data) throws DecodeException {
+    public Task decode(String data) throws LauraException {
         String[] args = data.split(Pattern.quote("|"));
         if (args.length < 2 || !"TDE".contains(args[0]) || !"01".contains(args[1])) {
             throw new DecodeException();
@@ -63,7 +63,7 @@ public class TaskList {
                 String data = scanner.nextLine();
                 try {
                     this.list.add(this.decode(data));
-                } catch (DecodeException e) {
+                } catch (LauraException e) {
                     UI.send(e.getMessage());
                 }
             }
