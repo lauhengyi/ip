@@ -6,12 +6,22 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(boolean isDone, String description) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public void mark() {
         this.isDone = true;
     }
 
     public void unmark() {
         this.isDone = false;
+    }
+
+    public String encode() {
+        String encodedDone = isDone ? "1" : "0";
+        return encodedDone + "|" + this.description;
     }
 
     @Override
