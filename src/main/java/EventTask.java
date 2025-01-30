@@ -8,6 +8,12 @@ public class EventTask extends Task {
         this.to = to;
     }
 
+    public EventTask(boolean isDone, String description, String from, String to) {
+        super(isDone, description);
+        this.from = from;
+        this.to = to;
+    }
+
     @Override
     public String encode() {
         return "E|" + super.encode() + "|" + this.from + "|" + this.to;

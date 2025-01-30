@@ -1,7 +1,10 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class TaskList {
     final static String dataPath = "src/main/data/tasks.txt";
@@ -18,8 +21,56 @@ public class TaskList {
                 writer.write(task.encode() + newLine);
             }
         } catch (IOException e) {
-            return;
+            Message.send(e.getMessage());
         }
+    }
+
+    public Task decode(String data) throws DecodeException {
+        String[] args = data.split(Pattern.quote("|"));
+        if (args.length < 2 || !"TDE".contains(args[0]) || !"01".contains(args[1])) {
+            throw new DecodeException();
+        }
+        boolean isDone = args[1].equals("1");
+
+        return switch (args[0]) {
+            case "T" -> {
+                if (args.length != 3) {
+                    throw new DecodeException();
+                }
+                yield new ToDoTask(isDone, args[2]);
+            }
+            case "D" -> {
+                if (args.length != 4) {
+                    throw new DecodeException();
+                }
+                yield new DeadlineTask(isDone, args[2], args[3]);
+            }
+            case "E" -> {
+                if (args.length != 5) {
+                    throw new DecodeException();
+                }
+                yield new EventTask(isDone, args[2], args[3], args[4]);
+            }
+            default -> throw new DecodeException();
+        };
+    }
+
+    public void load() {
+        File file = new File(TaskList.dataPath);
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String data = scanner.nextLine();
+                try {
+                    this.list.add(this.decode(data));
+                } catch (DecodeException e) {
+                    Message.send(e.getMessage());
+                }
+            }
+        } catch (FileNotFoundException e) {
+            Message.send(e.getMessage());
+        }
+
     }
 
     public void add(Task task) {

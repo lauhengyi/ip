@@ -5,6 +5,11 @@ public class DeadlineTask extends Task {
         this.deadline = deadline;
     }
 
+    public DeadlineTask(boolean isDone, String description, String deadline) {
+        super(isDone, description);
+        this.deadline = deadline;
+    }
+
     @Override
     public String encode() {
         return "D|" + super.encode() + "|" + this.deadline;

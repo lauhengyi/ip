@@ -13,6 +13,8 @@ public class Laura{
         );
 
         TaskList taskList = new TaskList();
+        taskList.load();
+
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();

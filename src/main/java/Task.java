@@ -6,6 +6,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(boolean isDone, String description) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public void mark() {
         this.isDone = true;
     }
