@@ -1,3 +1,8 @@
+package laura.task;
+
+import laura.Date;
+import laura.exception.LauraException;
+
 public class EventTask extends Task {
     final Date from;
     final Date to;

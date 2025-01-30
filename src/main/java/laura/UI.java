@@ -1,3 +1,5 @@
+package laura;
+
 public class UI {
     public static void welcomeMessage() {
         UI.send(

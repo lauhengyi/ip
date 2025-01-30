@@ -1,3 +1,12 @@
+package laura;
+
+import laura.exception.DecodeException;
+import laura.exception.LauraException;
+import laura.task.DeadlineTask;
+import laura.task.EventTask;
+import laura.task.Task;
+import laura.task.ToDoTask;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

@@ -1,3 +1,5 @@
+package laura.exception;
+
 public class LauraException extends Exception {
 
     public LauraException() {
