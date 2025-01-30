@@ -9,6 +9,11 @@ public class EventTask extends Task {
     }
 
     @Override
+    public String encode() {
+        return "E " + super.encode() + " " + this.from + " " + this.to;
+    }
+
+    @Override
     public String toString() {
         String timing = " (from: " + this.from + " to: " + this.to + ")";
         return "[E]" + super.toString() + timing;
