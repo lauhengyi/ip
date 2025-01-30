@@ -1,7 +1,14 @@
+package laura;
+
+import laura.exception.LauraException;
+import laura.task.DeadlineTask;
+import laura.task.EventTask;
+import laura.task.ToDoTask;
+
 import java.util.Scanner;
 
 public class Parser {
-    private Scanner scanner;
+    private final Scanner scanner;
     private boolean exit;
     private TaskList taskList;
 
@@ -25,7 +32,7 @@ public class Parser {
             String details = input.substring(9);
             int dlI = details.indexOf(" /by ");
             if (dlI == -1) {
-                throw new LauraException("Deadline Task has no deadline!");
+                throw new LauraException("Deadline Laura.Task has no deadline!");
             }
             String description = details.substring(0, dlI);
             String deadline = details.substring(dlI + 5);
@@ -34,13 +41,13 @@ public class Parser {
             String details = input.substring(6);
             int fI = details.indexOf(" /from ");
             if (fI == -1) {
-                throw new LauraException("Event Task has no From value!");
+                throw new LauraException("Event Laura.Task has no From value!");
             }
             String description = details.substring(0, fI);
             String timing = details.substring(fI + 7);
             int tI = timing.indexOf(" /to ");
             if (tI == -1) {
-                throw new LauraException("Event Task has no To value!");
+                throw new LauraException("Event Laura.Task has no To value!");
             }
             String from = timing.substring(0, tI);
             String to = timing.substring(tI + 5);

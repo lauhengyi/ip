@@ -1,4 +1,6 @@
-import java.util.Scanner;
+package laura;
+
+import laura.exception.LauraException;
 
 public class Laura {
     private final TaskList taskList;

@@ -1,3 +1,7 @@
+package laura;
+
+import laura.exception.LauraException;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
