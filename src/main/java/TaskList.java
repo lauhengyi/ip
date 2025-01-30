@@ -7,14 +7,16 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class TaskList {
-    final static String dataPath = "src/main/data/tasks.txt";
+    private final String dataPath;
     ArrayList<Task> list;
-    public TaskList() {
+
+    public TaskList(String dataPath) {
+        this.dataPath = dataPath;
         this.list = new ArrayList<>();
     }
 
     private void save() {
-        File file = new File(TaskList.dataPath);
+        File file = new File(this.dataPath);
         String newLine = System.lineSeparator();
         try (FileWriter writer = new FileWriter(file)) {
             for (Task task : this.list) {
@@ -56,7 +58,7 @@ public class TaskList {
     }
 
     public void load() {
-        File file = new File(TaskList.dataPath);
+        File file = new File(this.dataPath);
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
