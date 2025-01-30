@@ -21,7 +21,7 @@ public class TaskList {
                 writer.write(task.encode() + newLine);
             }
         } catch (IOException e) {
-            Message.send(e.getMessage());
+            UI.send(e.getMessage());
         }
     }
 
@@ -64,11 +64,11 @@ public class TaskList {
                 try {
                     this.list.add(this.decode(data));
                 } catch (DecodeException e) {
-                    Message.send(e.getMessage());
+                    UI.send(e.getMessage());
                 }
             }
         } catch (FileNotFoundException e) {
-            Message.send(e.getMessage());
+            UI.send(e.getMessage());
         }
 
     }
@@ -76,7 +76,7 @@ public class TaskList {
     public void add(Task task) {
         this.list.add(task);
         this.save();
-        Message.send("Got it! I've added this task:\n" + task);
+        UI.send("Got it! I've added this task:\n" + task);
     }
 
     public void delete(int index) throws LauraException {
@@ -85,7 +85,7 @@ public class TaskList {
         }
         Task removed = this.list.remove(index - 1);
         this.save();
-        Message.send("Noted. I've removed this task:\n"
+        UI.send("Noted. I've removed this task:\n"
                 + removed +
                 "\nNow you have " + this.list.size() + " in this list.");
     }
@@ -97,7 +97,7 @@ public class TaskList {
         Task curr = this.list.get(index - 1);
         curr.mark();
         this.save();
-        Message.send("Nice! I've marked this task as done:\n" + curr);
+        UI.send("Nice! I've marked this task as done:\n" + curr);
     }
 
     public void unmark(int index) throws LauraException {
@@ -107,7 +107,7 @@ public class TaskList {
         Task curr = this.list.get(index - 1);
         curr.unmark();
         this.save();
-        Message.send("Ok! I've marked this task as not done:\n" + curr);
+        UI.send("Ok! I've marked this task as not done:\n" + curr);
     }
 
     @Override
