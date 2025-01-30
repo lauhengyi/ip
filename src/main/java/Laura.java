@@ -1,14 +1,16 @@
 import java.util.Scanner;
 
-public class Laura{
+public class Laura {
+    private final TaskList taskList;
 
-    public static void main(String[] args) {
-        UI.welcomeMessage();
-
-        TaskList taskList = new TaskList();
+    public Laura() {
+        this.taskList = new TaskList("src/main/data/tasks.txt");
         taskList.load();
+    }
 
-        Parser parser = new Parser(taskList);
+    public void run() {
+        UI.welcomeMessage();
+        Parser parser = new Parser(this.taskList);
 
         while (!parser.hasEnded()) {
             try {
@@ -17,5 +19,9 @@ public class Laura{
                 UI.send(e.getMessage());
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Laura().run();
     }
 }
