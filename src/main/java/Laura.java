@@ -1,16 +1,9 @@
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Scanner;
-import java.io.File;
 
 public class Laura{
-    public static void main(String[] args) {
-        String name = "Laura";
 
-        Message.send(
-                "Hello I'm " + name + "\n" +
-                        "What can I do for you?"
-        );
+    public static void main(String[] args) {
+        UI.welcomeMessage();
 
         TaskList taskList = new TaskList();
         taskList.load();
@@ -19,20 +12,20 @@ public class Laura{
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
-                Message.send("Bye. Hope to see you again soon!");
+                UI.send("Bye. Hope to see you again soon!");
                 break;
             }
             try {
                 handleCommand(input, taskList);
-            }catch (LauraException e) {
-                Message.send(e.getMessage());
+            } catch (LauraException e) {
+                UI.send(e.getMessage());
             }
         }
     }
 
     private static void handleCommand(String input, TaskList taskList) throws LauraException {
         if (input.equals("list")) {
-            Message.send(taskList.toString());
+            UI.send(taskList.toString());
         } else if (input.startsWith("todo ")) {
             String description = input.substring(5);
             taskList.add(new ToDoTask(description));
