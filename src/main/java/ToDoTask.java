@@ -5,7 +5,7 @@ public class ToDoTask extends Task {
 
     @Override
     public String encode() {
-        return "T " + super.encode();
+        return "T|" + super.encode();
     }
 
     @Override

@@ -10,7 +10,7 @@ public class EventTask extends Task {
 
     @Override
     public String encode() {
-        return "E " + super.encode() + " " + this.from + " " + this.to;
+        return "E|" + super.encode() + "|" + this.from + "|" + this.to;
     }
 
     @Override

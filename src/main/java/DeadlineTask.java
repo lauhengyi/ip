@@ -7,7 +7,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String encode() {
-        return "D " + super.encode() + " " + this.deadline;
+        return "D|" + super.encode() + "|" + this.deadline;
     }
 
     @Override

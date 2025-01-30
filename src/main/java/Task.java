@@ -16,7 +16,7 @@ public class Task {
 
     public String encode() {
         String encodedDone = isDone ? "1" : "0";
-        return encodedDone + " " + this.description;
+        return encodedDone + "|" + this.description;
     }
 
     @Override
