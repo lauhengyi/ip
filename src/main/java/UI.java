@@ -6,6 +6,10 @@ public class UI {
         );
     }
 
+    public static void goodbyeMessage() {
+        UI.send("Bye. Hope to see you again soon!");
+    }
+
     public static void send(String message) {
         String line = "____________________________________________________________";
         System.out.println("\n" + line);
