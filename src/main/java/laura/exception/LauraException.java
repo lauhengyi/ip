@@ -1,5 +1,8 @@
 package laura.exception;
 
+/**
+ * The custom exception for all runtime errors that occur for Laura
+ */
 public class LauraException extends Exception {
 
     public LauraException() {
