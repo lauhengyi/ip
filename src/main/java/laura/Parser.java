@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Parser {
     private final Scanner scanner;
     private boolean exit;
-    private TaskList taskList;
+    private final TaskList taskList;
 
     public Parser(TaskList taskList) {
         this.scanner = new Scanner(System.in);
