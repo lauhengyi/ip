@@ -93,6 +93,9 @@ public class Parser {
                 index = -1;
             }
             taskList.unmark(index);
+        } else if (input.startsWith("find ")) {
+            String keyword = input.substring(5);
+            taskList.find(keyword);
         } else {
             throw new LauraException("Oops! I don't recognise this command!");
         }
