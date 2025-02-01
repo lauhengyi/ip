@@ -15,15 +15,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * Holds a list of Tasks that can be manipulated with various methods
+ */
 public class TaskList {
+    /** Where the local data should be stored */
     private final String dataPath;
+    /** The list that will hold the tasks*/
     ArrayList<Task> list;
 
+    /**
+     * Create an instance of TaskList
+     *
+     * @param dataPath The path where the local data should
+     *                 be stored (Local to the root directory)
+     */
     public TaskList(String dataPath) {
         this.dataPath = dataPath;
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Encode and Save the Tasklist to local
+     */
     private void save() {
         File file = new File(this.dataPath);
         String newLine = System.lineSeparator();
@@ -36,7 +50,15 @@ public class TaskList {
         }
     }
 
-    public Task decode(String data) throws LauraException {
+    /**
+     * Takes a line of encoded data, decodes it,
+     * and returns the corresponding Task
+     *
+     * @param data The encoded data
+     * @return The decoded Task
+     * @throws LauraException When the data is not encoded in a valid format
+     */
+    private Task decode(String data) throws LauraException {
         String[] args = data.split(Pattern.quote("|"));
         if (args.length < 2 || !"TDE".contains(args[0]) || !"01".contains(args[1])) {
             throw new DecodeException();
@@ -66,6 +88,9 @@ public class TaskList {
         };
     }
 
+    /**
+     * Load the Tasks saved from local into the TaskList
+     */
     public void load() {
         File file = new File(this.dataPath);
         try {
@@ -84,12 +109,21 @@ public class TaskList {
 
     }
 
+    /**
+     * Add a Task to the TaskList
+     * @param task The task to be added
+     */
     public void add(Task task) {
         this.list.add(task);
         this.save();
         UI.send("Got it! I've added this task:\n" + task);
     }
 
+    /**
+     * Delete a Task from the TaskList
+     * @param index The index of the Task in the TaskList to be deleted
+     * @throws LauraException If there is no corresponding Task for the index given
+     */
     public void delete(int index) throws LauraException {
         if (index > this.list.size() || index < 1) {
             throw new LauraException("Sorry, that task does not exist!");
@@ -101,6 +135,11 @@ public class TaskList {
                 "\nNow you have " + this.list.size() + " in this list.");
     }
 
+    /**
+     * Mark a Task from the TaskList
+     * @param index The index of the Task in the TaskList to be marked
+     * @throws LauraException If there is no corresponding Task for the index given
+     */
     public void mark(int index) throws LauraException {
         if (index > this.list.size() || index < 1) {
             throw new LauraException("Sorry, that task does not exist!");
@@ -111,6 +150,11 @@ public class TaskList {
         UI.send("Nice! I've marked this task as done:\n" + curr);
     }
 
+    /**
+     * Unmark a Task from the TaskList
+     * @param index The index of the Task in the TaskList to be unmarked
+     * @throws LauraException If there is no corresponding Task for the index given
+     */
     public void unmark(int index) throws LauraException {
         if (index > this.list.size() || index < 1) {
             throw new LauraException("Sorry, that task does not exist!");

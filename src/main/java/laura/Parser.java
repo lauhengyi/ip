@@ -7,17 +7,33 @@ import laura.task.ToDoTask;
 
 import java.util.Scanner;
 
+/**
+ * Deals with command handling for input
+ */
 public class Parser {
+    /** Scanner object to scan for input */
     private final Scanner scanner;
+    /** Whether the user has given the command to exit */
     private boolean exit;
+    /** Tasklist to manipulate */
     private final TaskList taskList;
 
+    /**
+     * To create a Parser instance
+     *
+     * @param taskList The Tasklist that will be manipulated with the commands
+     */
     public Parser(TaskList taskList) {
         this.scanner = new Scanner(System.in);
         this.exit = false;
         this.taskList = taskList;
     }
 
+    /**
+     * Execute the next command given by the user
+     *
+     * @throws LauraException if there is an error in the task given by the user
+     */
     public void handleCommand() throws LauraException {
         String input = this.scanner.nextLine();
         if (input.equals("bye")) {
@@ -32,7 +48,7 @@ public class Parser {
             String details = input.substring(9);
             int dlI = details.indexOf(" /by ");
             if (dlI == -1) {
-                throw new LauraException("Deadline Laura.Task has no deadline!");
+                throw new LauraException("Deadline Task has no deadline!");
             }
             String description = details.substring(0, dlI);
             String deadline = details.substring(dlI + 5);
@@ -41,13 +57,13 @@ public class Parser {
             String details = input.substring(6);
             int fI = details.indexOf(" /from ");
             if (fI == -1) {
-                throw new LauraException("Event Laura.Task has no From value!");
+                throw new LauraException("Event Task has no From value!");
             }
             String description = details.substring(0, fI);
             String timing = details.substring(fI + 7);
             int tI = timing.indexOf(" /to ");
             if (tI == -1) {
-                throw new LauraException("Event Laura.Task has no To value!");
+                throw new LauraException("Event Task has no To value!");
             }
             String from = timing.substring(0, tI);
             String to = timing.substring(tI + 5);
@@ -82,6 +98,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns whether the program should end or not
+     *
+     * @return Whether the program should end
+     */
     public boolean hasEnded() {
         return this.exit || !this.scanner.hasNextLine();
     }
