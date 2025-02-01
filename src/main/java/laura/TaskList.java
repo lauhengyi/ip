@@ -165,6 +165,22 @@ public class TaskList {
         UI.send("Ok! I've marked this task as not done:\n" + curr);
     }
 
+    /**
+     * Filter the current TaskList to only Tasks which has the keyword
+     * @param keyword The keyword to filter by
+     */
+    public void find(String keyword) {
+        ArrayList<Task> filtered = new ArrayList<>();
+        for (Task task : this.list) {
+            if (task.has(keyword)) {
+                filtered.add(task);
+            }
+        }
+        TaskList tasklist = new TaskList(dataPath);
+        tasklist.list = filtered;
+        UI.send("Here are the matching tasks in your list:\n" + tasklist);
+    }
+
     @Override
     public String toString() {
         StringBuilder message = new StringBuilder();

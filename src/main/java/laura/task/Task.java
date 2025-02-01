@@ -44,6 +44,15 @@ public abstract class Task {
     }
 
     /**
+     * Whether the description has the keyword inside it
+     * @param keyword The keyword to be searched
+     * @return Whether the description has the keyword inside it
+     */
+    public boolean has(String keyword) {
+        return this.description.contains(keyword);
+    }
+
+    /**
      * Get the encoded version of the Task for storage on local
      * @return The encoded string of the Task
      */
