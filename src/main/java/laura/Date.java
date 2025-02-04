@@ -22,7 +22,7 @@ public class Date {
      */
     public Date(String dateString) throws LauraException {
         try {
-            this.date = LocalDate.parse(dateString, stringFormat);
+            this.date = LocalDate.parse(dateString, STRING_FORMAT);
         } catch (DateTimeException e) {
             throw new LauraException("There is a problem parsing your date, make sure your date is in the format dd/mm/yyyy");
         }
@@ -33,7 +33,7 @@ public class Date {
      * @return The format of the date for data encoding
      */
     public String encode() {
-        return this.date.format(stringFormat);
+        return this.date.format(STRING_FORMAT);
     }
 
     @Override
