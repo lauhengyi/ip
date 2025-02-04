@@ -14,7 +14,7 @@ public class Parser {
     /** Scanner object to scan for input */
     private final Scanner scanner;
     /** Whether the user has given the command to exit */
-    private boolean exit;
+    private boolean shouldExit;
     /** Tasklist to manipulate */
     private final TaskList taskList;
 
@@ -25,7 +25,7 @@ public class Parser {
      */
     public Parser(TaskList taskList) {
         this.scanner = new Scanner(System.in);
-        this.exit = false;
+        this.shouldExit = false;
         this.taskList = taskList;
     }
 
@@ -38,7 +38,7 @@ public class Parser {
         String input = this.scanner.nextLine();
         if (input.equals("bye")) {
             UI.goodbyeMessage();
-            this.exit = true;
+            this.shouldExit = true;
         } else if (input.equals("list")) {
             UI.send(taskList.toString());
         } else if (input.startsWith("todo ")) {
@@ -107,6 +107,6 @@ public class Parser {
      * @return Whether the program should end
      */
     public boolean hasEnded() {
-        return this.exit || !this.scanner.hasNextLine();
+        return this.shouldExit || !this.scanner.hasNextLine();
     }
 }
