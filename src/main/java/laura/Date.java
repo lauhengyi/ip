@@ -1,10 +1,10 @@
 package laura;
 
-import laura.exception.LauraException;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import laura.exception.LauraException;
 
 /**
  * Class that deals with formatting of dates
@@ -24,12 +24,12 @@ public class Date {
         try {
             this.date = LocalDate.parse(dateString, STRING_FORMAT);
         } catch (DateTimeException e) {
-            throw new LauraException("There is a problem parsing your date, make sure your date is in the format dd/mm/yyyy");
+            throw new LauraException("There is a problem parsing your date,"
+                    + " make sure your date is in the format dd/mm/yyyy");
         }
     }
 
     /**
-     *
      * @return The format of the date for data encoding
      */
     public String encode() {

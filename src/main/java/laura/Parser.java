@@ -1,11 +1,11 @@
 package laura;
 
+import java.util.Scanner;
+
 import laura.exception.LauraException;
 import laura.task.DeadlineTask;
 import laura.task.EventTask;
 import laura.task.ToDoTask;
-
-import java.util.Scanner;
 
 /**
  * Deals with command handling for input

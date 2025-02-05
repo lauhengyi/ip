@@ -1,12 +1,5 @@
 package laura;
 
-import laura.exception.DecodeException;
-import laura.exception.LauraException;
-import laura.task.DeadlineTask;
-import laura.task.EventTask;
-import laura.task.Task;
-import laura.task.ToDoTask;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,14 +8,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import laura.exception.DecodeException;
+import laura.exception.LauraException;
+import laura.task.DeadlineTask;
+import laura.task.EventTask;
+import laura.task.Task;
+import laura.task.ToDoTask;
+
+
 /**
  * Holds a list of Tasks that can be manipulated with various methods
  */
 public class TaskList {
-    /** Where the local data should be stored */
+    /**
+     * Where the local data should be stored
+     */
     private final String dataPath;
-    /** The list that will hold the tasks*/
-    ArrayList<Task> list;
+    /**
+     * The list that will hold the tasks
+     */
+    private ArrayList<Task> list;
 
     /**
      * Create an instance of TaskList
@@ -66,25 +71,25 @@ public class TaskList {
         boolean isDone = args[1].equals("1");
 
         return switch (args[0]) {
-            case "T" -> {
-                if (args.length != 3) {
-                    throw new DecodeException();
-                }
-                yield new ToDoTask(isDone, args[2]);
+        case "T" -> {
+            if (args.length != 3) {
+                throw new DecodeException();
             }
-            case "D" -> {
-                if (args.length != 4) {
-                    throw new DecodeException();
-                }
-                yield new DeadlineTask(isDone, args[2], args[3]);
+            yield new ToDoTask(isDone, args[2]);
+        }
+        case "D" -> {
+            if (args.length != 4) {
+                throw new DecodeException();
             }
-            case "E" -> {
-                if (args.length != 5) {
-                    throw new DecodeException();
-                }
-                yield new EventTask(isDone, args[2], args[3], args[4]);
+            yield new DeadlineTask(isDone, args[2], args[3]);
+        }
+        case "E" -> {
+            if (args.length != 5) {
+                throw new DecodeException();
             }
-            default -> throw new DecodeException();
+            yield new EventTask(isDone, args[2], args[3], args[4]);
+        }
+        default -> throw new DecodeException();
         };
     }
 
@@ -111,6 +116,7 @@ public class TaskList {
 
     /**
      * Add a Task to the TaskList
+     *
      * @param task The task to be added
      */
     public void add(Task task) {
@@ -121,6 +127,7 @@ public class TaskList {
 
     /**
      * Delete a Task from the TaskList
+     *
      * @param index The index of the Task in the TaskList to be deleted
      * @throws LauraException If there is no corresponding Task for the index given
      */
@@ -131,12 +138,12 @@ public class TaskList {
         Task removed = this.list.remove(index - 1);
         this.save();
         UI.send("Noted. I've removed this task:\n"
-                + removed +
-                "\nNow you have " + this.list.size() + " in this list.");
+                + removed + "\nNow you have " + this.list.size() + " in this list.");
     }
 
     /**
      * Mark a Task from the TaskList
+     *
      * @param index The index of the Task in the TaskList to be marked
      * @throws LauraException If there is no corresponding Task for the index given
      */
@@ -152,6 +159,7 @@ public class TaskList {
 
     /**
      * Unmark a Task from the TaskList
+     *
      * @param index The index of the Task in the TaskList to be unmarked
      * @throws LauraException If there is no corresponding Task for the index given
      */
@@ -167,6 +175,7 @@ public class TaskList {
 
     /**
      * Filter the current TaskList to only Tasks which has the keyword
+     *
      * @param keyword The keyword to filter by
      */
     public void find(String keyword) {

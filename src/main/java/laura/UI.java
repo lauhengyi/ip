@@ -9,8 +9,8 @@ public class UI {
      */
     public static void welcomeMessage() {
         UI.send(
-                "Hello I'm Laura\n" +
-                        "What can I do for you?"
+                "Hello I'm Laura\n"
+                        + "What can I do for you?"
         );
     }
 
