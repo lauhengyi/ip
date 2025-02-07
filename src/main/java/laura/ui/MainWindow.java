@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import laura.Laura;
+
 /**
  * Controller for the main GUI.
  */
@@ -20,7 +22,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-//    private Duke duke;
+    private Laura laura;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/laura.jpg"));
@@ -30,10 +32,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
-//    public void setDuke(Duke d) {
-//        duke = d;
-//    }
+    /** Injects the Laura instance */
+    public void setLaura(Laura l) {
+        this.laura = l;
+    }
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
@@ -42,10 +44,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-//        String response = duke.getResponse(input);
+        String response = this.laura.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(input, dukeImage)
+                DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
     }

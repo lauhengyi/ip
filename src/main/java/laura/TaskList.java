@@ -43,7 +43,7 @@ public class TaskList {
     /**
      * Encode and Save the Tasklist to local
      */
-    private void save() {
+    private void save() throws LauraException {
         File file = new File(this.dataPath);
         String newLine = System.lineSeparator();
         try (FileWriter writer = new FileWriter(file)) {
@@ -51,7 +51,7 @@ public class TaskList {
                 writer.write(task.encode() + newLine);
             }
         } catch (IOException e) {
-            UI.send(e.getMessage());
+            throw new LauraException("Error saving file!");
         }
     }
 
@@ -96,20 +96,16 @@ public class TaskList {
     /**
      * Load the Tasks saved from local into the TaskList
      */
-    public void load() {
+    public void load() throws LauraException {
         File file = new File(this.dataPath);
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String data = scanner.nextLine();
-                try {
-                    this.list.add(this.decode(data));
-                } catch (LauraException e) {
-                    UI.send(e.getMessage());
-                }
+                this.list.add(this.decode(data));
             }
         } catch (FileNotFoundException e) {
-            UI.send(e.getMessage());
+            e.printStackTrace();
         }
 
     }
@@ -119,10 +115,10 @@ public class TaskList {
      *
      * @param task The task to be added
      */
-    public void add(Task task) {
+    public String add(Task task) throws LauraException {
         this.list.add(task);
         this.save();
-        UI.send("Got it! I've added this task:\n" + task);
+        return ("Got it! I've added this task:\n" + task);
     }
 
     /**
@@ -131,13 +127,13 @@ public class TaskList {
      * @param index The index of the Task in the TaskList to be deleted
      * @throws LauraException If there is no corresponding Task for the index given
      */
-    public void delete(int index) throws LauraException {
+    public String delete(int index) throws LauraException {
         if (index > this.list.size() || index < 1) {
             throw new LauraException("Sorry, that task does not exist!");
         }
         Task removed = this.list.remove(index - 1);
         this.save();
-        UI.send("Noted. I've removed this task:\n"
+        return ("Noted. I've removed this task:\n"
                 + removed + "\nNow you have " + this.list.size() + " in this list.");
     }
 
@@ -147,14 +143,14 @@ public class TaskList {
      * @param index The index of the Task in the TaskList to be marked
      * @throws LauraException If there is no corresponding Task for the index given
      */
-    public void mark(int index) throws LauraException {
+    public String mark(int index) throws LauraException {
         if (index > this.list.size() || index < 1) {
             throw new LauraException("Sorry, that task does not exist!");
         }
         Task curr = this.list.get(index - 1);
         curr.mark();
         this.save();
-        UI.send("Nice! I've marked this task as done:\n" + curr);
+        return ("Nice! I've marked this task as done:\n" + curr);
     }
 
     /**
@@ -163,14 +159,14 @@ public class TaskList {
      * @param index The index of the Task in the TaskList to be unmarked
      * @throws LauraException If there is no corresponding Task for the index given
      */
-    public void unmark(int index) throws LauraException {
+    public String unmark(int index) throws LauraException {
         if (index > this.list.size() || index < 1) {
             throw new LauraException("Sorry, that task does not exist!");
         }
         Task curr = this.list.get(index - 1);
         curr.unmark();
         this.save();
-        UI.send("Ok! I've marked this task as not done:\n" + curr);
+        return ("Ok! I've marked this task as not done:\n" + curr);
     }
 
     /**
@@ -178,7 +174,7 @@ public class TaskList {
      *
      * @param keyword The keyword to filter by
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
         ArrayList<Task> filtered = new ArrayList<>();
         for (Task task : this.list) {
             if (task.has(keyword)) {
@@ -187,7 +183,7 @@ public class TaskList {
         }
         TaskList tasklist = new TaskList(dataPath);
         tasklist.list = filtered;
-        UI.send("Here are the matching tasks in your list:\n" + tasklist);
+        return ("Here are the matching tasks in your list:\n" + tasklist);
     }
 
     @Override
