@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -45,6 +48,8 @@ public class TaskList {
      */
     private void save() throws LauraException {
         File file = new File(this.dataPath);
+        assert file.isFile();
+        assert file.canRead();
         String newLine = System.lineSeparator();
         try (FileWriter writer = new FileWriter(file)) {
             for (Task task : this.list) {
