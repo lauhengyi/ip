@@ -105,7 +105,7 @@ public class TaskList {
                 this.list.add(this.decode(data));
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new LauraException("There is no save file loaded!");
         }
 
     }
