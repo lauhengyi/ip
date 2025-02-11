@@ -85,6 +85,15 @@ public class Parser {
         int index = getIndex(details);
         return taskList.unmark(index);
     }
+    private String handleTagCommand(String details) throws LauraException {
+        String[] args = details.split("\\s+");
+        if (args.length != 2) {
+            throw new LauraException("tag command should include an index and a valid tag value (No spaces in tag!)");
+        }
+        int index = getIndex(args[0]);
+        String tag = args[1];
+        return taskList.tag(index, tag);
+    }
     private String handleFindCommand(String keyword) {
         return taskList.find(keyword);
     }
@@ -117,6 +126,9 @@ public class Parser {
         } else if (input.startsWith("unmark ")) {
             String details = input.substring(7);
             return handleUnmarkCommand(details);
+        } else if (input.startsWith("tag ")) {
+            String details = input.substring(4);
+            return handleTagCommand(details);
         } else if (input.startsWith("find ")) {
             String keyword = input.substring(5);
             return handleFindCommand(keyword);
