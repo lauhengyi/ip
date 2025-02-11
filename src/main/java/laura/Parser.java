@@ -41,14 +41,17 @@ public class Parser {
             return taskList.add(new ToDoTask(description));
         } else if (input.startsWith("deadline ")) {
             String details = input.substring(9);
+            // Making sure by values are valid/exists
             int dlI = details.indexOf(" /by ");
             if (dlI == -1) {
                 throw new LauraException("Deadline Task has no deadline!");
             }
+            // Extracting values
             String description = details.substring(0, dlI);
             String deadline = details.substring(dlI + 5);
             return taskList.add(new DeadlineTask(description, deadline));
         } else if (input.startsWith("event ")) {
+            // Making sure from and to values are valid/exists
             String details = input.substring(6);
             int fI = details.indexOf(" /from ");
             if (fI == -1) {
@@ -60,6 +63,7 @@ public class Parser {
             if (tI == -1) {
                 throw new LauraException("Event Task has no To value!");
             }
+            // Extracting from and to values
             String from = timing.substring(0, tI);
             String to = timing.substring(tI + 5);
 
