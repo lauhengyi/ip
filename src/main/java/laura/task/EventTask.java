@@ -25,12 +25,13 @@ public class EventTask extends Task {
     /**
      * @param isDone Whether the task is marked or not
      * @param description The Task's name
+     * @param tag The tag of the Task
      * @param from The start date of the Task
      * @param to The end date of the Task
      * @throws LauraException If any of the dates is in an incorrect format
      */
-    public EventTask(boolean isDone, String description, String from, String to) throws LauraException {
-        super(isDone, description);
+    public EventTask(boolean isDone, String description, String tag, String from, String to) throws LauraException {
+        super(isDone, description, tag);
         this.from = new Date(from);
         this.to = new Date(to);
     }

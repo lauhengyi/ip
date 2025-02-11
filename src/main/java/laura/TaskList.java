@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -69,30 +70,31 @@ public class TaskList {
      * @throws LauraException When the data is not encoded in a valid format
      */
     private Task decode(String data) throws LauraException {
-        String[] args = data.split(Pattern.quote("|"));
-        if (args.length < 2 || !"TDE".contains(args[0]) || !"01".contains(args[1])) {
+        String[] args = data.split("\\|", -1);
+        if (args.length < 3 || !"TDE".contains(args[0]) || !"01".contains(args[1])) {
             throw new DecodeException();
         }
+        System.out.println(Arrays.toString(args));
         boolean isDone = args[1].equals("1");
 
         return switch (args[0]) {
         case "T" -> {
-            if (args.length != 3) {
-                throw new DecodeException();
-            }
-            yield new ToDoTask(isDone, args[2]);
-        }
-        case "D" -> {
             if (args.length != 4) {
                 throw new DecodeException();
             }
-            yield new DeadlineTask(isDone, args[2], args[3]);
+            yield new ToDoTask(isDone, args[2], args[3]);
         }
-        case "E" -> {
+        case "D" -> {
             if (args.length != 5) {
                 throw new DecodeException();
             }
-            yield new EventTask(isDone, args[2], args[3], args[4]);
+            yield new DeadlineTask(isDone, args[2], args[3], args[4]);
+        }
+        case "E" -> {
+            if (args.length != 6) {
+                throw new DecodeException();
+            }
+            yield new EventTask(isDone, args[2], args[3], args[4], args[5]);
         }
         default -> throw new DecodeException();
         };
@@ -110,7 +112,7 @@ public class TaskList {
                 this.list.add(this.decode(data));
             }
         } catch (FileNotFoundException e) {
-            throw new LauraException("There is no save file loaded!");
+            this.save();
         }
 
     }
@@ -172,6 +174,22 @@ public class TaskList {
         curr.unmark();
         this.save();
         return ("Ok! I've marked this task as not done:\n" + curr);
+    }
+
+    /**
+     * Tags the Task with the corresponding index with the provided tag
+     * @param index The index of the Task in the TaskList to be unmarked
+     * @param tag The value of the tag that the Task will be tagged with
+     * @throws LauraException If there is no corresponding Task for the index given
+     */
+    public String tag(int index, String tag) throws LauraException {
+        if (index > this.list.size() || index < 1) {
+            throw new LauraException("Sorry, that task does not exist!");
+        }
+        Task curr = this.list.get(index - 1);
+        curr.tag(tag);
+        this.save();
+        return ("Ok! I've tagged this task!:\n" + curr);
     }
 
     /**

@@ -9,6 +9,7 @@ public abstract class Task {
      * Whether the Task is marked or not
      */
     private boolean isDone;
+    private String tag;
 
     /**
      * Create a Task instance
@@ -17,16 +18,19 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tag = "";
     }
 
     /**
      * Create a Task instance
      * @param isDone Whether the task is marked
      * @param description What the Task is named
+     * @param tag The Tag of the Task
      */
-    public Task(boolean isDone, String description) {
+    public Task(boolean isDone, String description, String tag) {
         this.description = description;
         this.isDone = isDone;
+        this.tag = tag;
     }
 
     /**
@@ -44,6 +48,14 @@ public abstract class Task {
     }
 
     /**
+     * Add / Update the tag of a class
+     * @param tag The tag to be added / updated to the class
+     */
+    public void tag(String tag) {
+        this.tag = tag;
+    }
+
+    /**
      * Whether the description has the keyword inside it
      * @param keyword The keyword to be searched
      * @return Whether the description has the keyword inside it
@@ -58,12 +70,13 @@ public abstract class Task {
      */
     public String encode() {
         String encodedDone = isDone ? "1" : "0";
-        return encodedDone + "|" + this.description;
+        return encodedDone + "|" + this.description + "|" + this.tag;
     }
 
     @Override
     public String toString() {
         String symbol = isDone ? "[X]" : "[ ]";
-        return symbol + " " + this.description;
+        String tagString = this.tag.isEmpty() ? "" : "#" + this.tag;
+        return symbol + " " + this.description + " " + tagString;
     }
 }
