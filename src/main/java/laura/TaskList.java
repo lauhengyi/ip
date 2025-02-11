@@ -177,6 +177,22 @@ public class TaskList {
     }
 
     /**
+     * Tags the Task with the corresponding index with the provided tag
+     * @param index The index of the Task in the TaskList to be unmarked
+     * @param tag The value of the tag that the Task will be tagged with
+     * @throws LauraException If there is no corresponding Task for the index given
+     */
+    public String tag(int index, String tag) throws LauraException {
+        if (index > this.list.size() || index < 1) {
+            throw new LauraException("Sorry, that task does not exist!");
+        }
+        Task curr = this.list.get(index - 1);
+        curr.tag(tag);
+        this.save();
+        return ("Ok! I've tagged this task!:\n" + curr);
+    }
+
+    /**
      * Filter the current TaskList to only Tasks which has the keyword
      *
      * @param keyword The keyword to filter by
