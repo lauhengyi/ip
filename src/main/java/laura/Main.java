@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 import laura.exception.LauraException;
 import laura.ui.MainWindow;
 
+/**
+ * The main application initialization
+ */
 public class Main extends Application {
     @Override
     public void start(Stage stage) {
