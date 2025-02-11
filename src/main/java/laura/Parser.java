@@ -25,6 +25,70 @@ public class Parser {
         this.taskList = taskList;
     }
 
+    private String handleByeCommand() {
+        this.shouldExit = true;
+        return Message.goodbye();
+    }
+    private String handleListCommand() {
+        return taskList.toString();
+    }
+    private String handleToDoCommand(String description) throws LauraException {
+        return taskList.add(new ToDoTask(description));
+    }
+    private String handleDeadlineCommand(String details) throws LauraException {
+        // Making sure by values are valid/exists
+        int dlI = details.indexOf(" /by ");
+        if (dlI == -1) {
+            throw new LauraException("Deadline Task has no deadline!");
+        }
+        // Extracting values
+        String description = details.substring(0, dlI);
+        String deadline = details.substring(dlI + 5);
+        return taskList.add(new DeadlineTask(description, deadline));
+    }
+    private String handleEventCommand(String details) throws LauraException {
+        // Making sure from and to values are valid/exists
+        int fI = details.indexOf(" /from ");
+        if (fI == -1) {
+            throw new LauraException("Event Task has no From value!");
+        }
+        String description = details.substring(0, fI);
+        String timing = details.substring(fI + 7);
+        int tI = timing.indexOf(" /to ");
+        if (tI == -1) {
+            throw new LauraException("Event Task has no To value!");
+        }
+        // Extracting from and to values
+        String from = timing.substring(0, tI);
+        String to = timing.substring(tI + 5);
+
+        return taskList.add(new EventTask(description, from, to));
+    }
+    private int getIndex(String details) {
+        int index;
+        try {
+            index = Integer.parseInt(details);
+        } catch (NumberFormatException e) {
+            index = -1;
+        }
+        return index;
+    }
+    private String handleRemoveCommand(String details) throws LauraException {
+        int index = getIndex(details);
+        return taskList.delete(index);
+    }
+    private String handleMarkCommand(String details) throws LauraException {
+        int index = getIndex(details);
+        return taskList.mark(index);
+    }
+    private String handleUnmarkCommand(String details) throws LauraException {
+        int index = getIndex(details);
+        return taskList.unmark(index);
+    }
+    private String handleFindCommand(String keyword) {
+        return taskList.find(keyword);
+    }
+
     /**
      * Execute the next command given by the user
      *
@@ -32,69 +96,30 @@ public class Parser {
      */
     public String handleCommand(String input) throws LauraException {
         if (input.equals("bye")) {
-            this.shouldExit = true;
-            return Message.goodbye();
+            return handleByeCommand();
         } else if (input.equals("list")) {
-            return taskList.toString();
+            return handleListCommand();
         } else if (input.startsWith("todo ")) {
             String description = input.substring(5);
-            return taskList.add(new ToDoTask(description));
+            return handleToDoCommand(description);
         } else if (input.startsWith("deadline ")) {
             String details = input.substring(9);
-            // Making sure by values are valid/exists
-            int dlI = details.indexOf(" /by ");
-            if (dlI == -1) {
-                throw new LauraException("Deadline Task has no deadline!");
-            }
-            // Extracting values
-            String description = details.substring(0, dlI);
-            String deadline = details.substring(dlI + 5);
-            return taskList.add(new DeadlineTask(description, deadline));
+            return handleDeadlineCommand(details);
         } else if (input.startsWith("event ")) {
-            // Making sure from and to values are valid/exists
             String details = input.substring(6);
-            int fI = details.indexOf(" /from ");
-            if (fI == -1) {
-                throw new LauraException("Event Task has no From value!");
-            }
-            String description = details.substring(0, fI);
-            String timing = details.substring(fI + 7);
-            int tI = timing.indexOf(" /to ");
-            if (tI == -1) {
-                throw new LauraException("Event Task has no To value!");
-            }
-            // Extracting from and to values
-            String from = timing.substring(0, tI);
-            String to = timing.substring(tI + 5);
-
-            return taskList.add(new EventTask(description, from, to));
+            return handleEventCommand(details);
         } else if (input.startsWith("remove ")) {
-            int index;
-            try {
-                index = Integer.parseInt(input.substring(7));
-            } catch (NumberFormatException e) {
-                index = -1;
-            }
-            return taskList.delete(index);
+            String details = input.substring(7);
+            return handleRemoveCommand(details);
         } else if (input.startsWith("mark ")) {
-            int index;
-            try {
-                index = Integer.parseInt(input.substring(5));
-            } catch (NumberFormatException e) {
-                index = -1;
-            }
-            return taskList.mark(index);
+            String details = input.substring(5);
+            return handleMarkCommand(details);
         } else if (input.startsWith("unmark ")) {
-            int index;
-            try {
-                index = Integer.parseInt(input.substring(7));
-            } catch (NumberFormatException e) {
-                index = -1;
-            }
-            return taskList.unmark(index);
+            String details = input.substring(7);
+            return handleUnmarkCommand(details);
         } else if (input.startsWith("find ")) {
             String keyword = input.substring(5);
-            return taskList.find(keyword);
+            return handleFindCommand(keyword);
         } else {
             throw new LauraException("Oops! I don't recognise this command!");
         }
