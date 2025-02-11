@@ -23,11 +23,12 @@ public class DeadlineTask extends Task {
     /**
      * @param isDone Whether the task is marked or not
      * @param description The Task's Name
+     * @param tag The tag of the Task
      * @param deadline When the Task will end
      * @throws LauraException When the date is in an incorrect format
      */
-    public DeadlineTask(boolean isDone, String description, String deadline) throws LauraException {
-        super(isDone, description);
+    public DeadlineTask(boolean isDone, String description, String tag, String deadline) throws LauraException {
+        super(isDone, description, tag);
         this.deadline = new Date(deadline);
     }
 
