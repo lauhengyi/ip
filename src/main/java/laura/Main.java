@@ -17,14 +17,13 @@ public class Main extends Application {
             Laura laura = new Laura();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            fxmlLoader.<MainWindow>getController().setLaura(laura);
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setLaura(laura);
             stage.show();
-        } catch (IOException e) {
+        } catch (IOException | LauraException e) {
             e.printStackTrace();
-        } catch (LauraException e) {
-            e.printStackTrace();
+            System.exit(0);
         }
     }
 }
