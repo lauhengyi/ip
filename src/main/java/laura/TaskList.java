@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -69,10 +70,11 @@ public class TaskList {
      * @throws LauraException When the data is not encoded in a valid format
      */
     private Task decode(String data) throws LauraException {
-        String[] args = data.split(Pattern.quote("|"));
+        String[] args = data.split("\\|", -1);
         if (args.length < 3 || !"TDE".contains(args[0]) || !"01".contains(args[1])) {
             throw new DecodeException();
         }
+        System.out.println(Arrays.toString(args));
         boolean isDone = args[1].equals("1");
 
         return switch (args[0]) {
