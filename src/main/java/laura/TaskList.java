@@ -4,13 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import laura.exception.DecodeException;
 import laura.exception.LauraException;
@@ -49,8 +44,16 @@ public class TaskList {
      */
     private void save() throws LauraException {
         File file = new File(this.dataPath);
-        assert file.isFile();
-        assert file.canRead();
+
+        // Create the parent directories if they don't already exist
+        File parentDirectory = file.getParentFile();
+        if (parentDirectory != null && !parentDirectory.exists()) {
+            boolean success = parentDirectory.mkdirs();
+            if (!success) {
+                throw new LauraException("Error creating directory structure: " + parentDirectory.getPath());
+            }
+        }
+
         String newLine = System.lineSeparator();
         try (FileWriter writer = new FileWriter(file)) {
             for (Task task : this.list) {
@@ -104,6 +107,9 @@ public class TaskList {
      */
     public void load() throws LauraException {
         File file = new File(this.dataPath);
+        if (!file.isFile() || !file.canRead()) {
+            return;
+        }
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
