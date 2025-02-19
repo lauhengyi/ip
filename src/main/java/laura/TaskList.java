@@ -74,7 +74,6 @@ public class TaskList {
         if (args.length < 3 || !"TDE".contains(args[0]) || !"01".contains(args[1])) {
             throw new DecodeException();
         }
-        System.out.println(Arrays.toString(args));
         boolean isDone = args[1].equals("1");
 
         return switch (args[0]) {
