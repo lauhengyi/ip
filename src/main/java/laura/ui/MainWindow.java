@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import laura.Laura;
 import laura.Message;
 
+// Solution adapted from JavaFX tutorial
 /**
  * Controller for the main GUI.
  */

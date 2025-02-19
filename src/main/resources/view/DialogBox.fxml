@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<!--Solution adapted from JavaFX tutorial-->
 
 <fx:root alignment="TOP_RIGHT"
          maxHeight="1.7976931348623157E308"
