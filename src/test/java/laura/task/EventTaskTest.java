@@ -52,7 +52,7 @@ public class EventTaskTest {
     @Test
     void unmark_success() throws LauraException{
         // When marked, unmark will unmark it
-        EventTask test = new EventTask(true, "This is a test", "13/04/2002", "15/05/2004");
+        EventTask test = new EventTask(true, "This is a test", "", "13/04/2002", "15/05/2004");
         assertEquals("[E][X] This is a test (from: 13 April 2002 to: 15 May 2004)", test.toString());
         test.unmark();
         assertEquals("[E][ ] This is a test (from: 13 April 2002 to: 15 May 2004)", test.toString());
@@ -61,17 +61,20 @@ public class EventTaskTest {
     @Test
     void encode_success() throws LauraException{
         // When encode is called, it should provide the correct encoding
-        assertEquals("E|0|Test1|13/04/2002|15/05/2004", new EventTask("Test1", "13/04/2002", "15/05/2004").encode());
+        assertEquals("E|0|Test1||13/04/2002|15/05/2004", new EventTask("Test1", "13/04/2002", "15/05/2004").encode());
 
         // Encoding should include correct marking
         EventTask test2 = new EventTask("Test2", "13/04/2002", "15/05/2004");
         test2.mark();
-        assertEquals("E|1|Test2|13/04/2002|15/05/2004", test2.encode());
+        assertEquals("E|1|Test2||13/04/2002|15/05/2004", test2.encode());
         test2.unmark();
-        assertEquals("E|0|Test2|13/04/2002|15/05/2004", test2.encode());
+        assertEquals("E|0|Test2||13/04/2002|15/05/2004", test2.encode());
 
         // Should provide correct marking when first constructed
-        assertEquals("E|1|Test3|13/04/2002|15/05/2004", new EventTask(true, "Test3", "13/04/2002", "15/05/2004").encode());
+        assertEquals("E|1|Test3||13/04/2002|15/05/2004", new EventTask(true, "Test3", "", "13/04/2002", "15/05/2004").encode());
+
+        // Should encode Tag properly
+        assertEquals("E|1|Test4|test tag!|13/04/2002|15/05/2004", new EventTask(true, "Test4", "test tag!", "13/04/2002", "15/05/2004").encode());
     }
 
 }

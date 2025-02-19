@@ -17,7 +17,7 @@ public class ToDoTaskTest {
     @Test
     void unmark_success() {
         // When marked, unmark will unmark it
-        ToDoTask test = new ToDoTask(true, "This is a test");
+        ToDoTask test = new ToDoTask(true, "This is a test", "");
         assertEquals("[T][X] This is a test", test.toString());
         test.unmark();
         assertEquals("[T][ ] This is a test", test.toString());
@@ -26,17 +26,20 @@ public class ToDoTaskTest {
     @Test
     void encode_success() {
         // When encode is called, it should provide the correct encoding
-        assertEquals("T|0|Test1", new ToDoTask("Test1").encode());
+        assertEquals("T|0|Test1|", new ToDoTask("Test1").encode());
 
         // Encoding should include correct marking
         ToDoTask test2 = new ToDoTask("Test2");
         test2.mark();
-        assertEquals("T|1|Test2", test2.encode());
+        assertEquals("T|1|Test2|", test2.encode());
         test2.unmark();
-        assertEquals("T|0|Test2", test2.encode());
+        assertEquals("T|0|Test2|", test2.encode());
 
         // Should provide correct marking when first constructed
-        assertEquals("T|1|Test3", new ToDoTask(true, "Test3").encode());
+        assertEquals("T|1|Test3|", new ToDoTask(true, "Test3", "").encode());
+
+        // Should encode tag properly
+        assertEquals("T|1|Test4|test tag!", new ToDoTask(true, "Test4", "test tag!").encode());
     }
 
 }

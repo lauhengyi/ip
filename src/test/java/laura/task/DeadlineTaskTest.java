@@ -48,7 +48,7 @@ public class DeadlineTaskTest {
     @Test
     void unmark_success() throws LauraException{
         // When marked, unmark will unmark it
-        DeadlineTask test = new DeadlineTask(true, "This is a test", "13/04/2002");
+        DeadlineTask test = new DeadlineTask(true, "This is a test","", "13/04/2002");
         assertEquals("[D][X] This is a test (by: 13 April 2002)", test.toString());
         test.unmark();
         assertEquals("[D][ ] This is a test (by: 13 April 2002)", test.toString());
@@ -57,16 +57,19 @@ public class DeadlineTaskTest {
     @Test
     void encode_success() throws LauraException{
         // When encode is called, it should provide the correct encoding
-        assertEquals("D|0|Test1|13/04/2002", new DeadlineTask("Test1", "13/04/2002").encode());
+        assertEquals("D|0|Test1||13/04/2002", new DeadlineTask("Test1", "13/04/2002").encode());
 
         // Encoding should include correct marking
         DeadlineTask test2 = new DeadlineTask("Test2", "13/04/2002");
         test2.mark();
-        assertEquals("D|1|Test2|13/04/2002", test2.encode());
+        assertEquals("D|1|Test2||13/04/2002", test2.encode());
         test2.unmark();
-        assertEquals("D|0|Test2|13/04/2002", test2.encode());
+        assertEquals("D|0|Test2||13/04/2002", test2.encode());
 
         // Should provide correct marking when first constructed
-        assertEquals("D|1|Test3|13/04/2002", new DeadlineTask(true, "Test3", "13/04/2002").encode());
+        assertEquals("D|1|Test3||13/04/2002", new DeadlineTask(true, "Test3", "", "13/04/2002").encode());
+
+        // Should encode Tag properly
+        assertEquals("D|1|Test4|test tag!|13/04/2002", new DeadlineTask(true, "Test4", "test tag!", "13/04/2002").encode());
     }
 }

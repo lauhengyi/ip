@@ -76,7 +76,7 @@ public abstract class Task {
     @Override
     public String toString() {
         String symbol = isDone ? "[X]" : "[ ]";
-        String tagString = this.tag.isEmpty() ? "" : "#" + this.tag;
-        return symbol + " " + this.description + " " + tagString;
+        String tagString = this.tag.isEmpty() ? "" : " #" + this.tag;
+        return symbol + " " + this.description + tagString;
     }
 }
