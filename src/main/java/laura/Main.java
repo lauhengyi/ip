@@ -23,6 +23,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setLaura(laura);
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("L.A.U.R.A");
             stage.show();
         } catch (IOException | LauraException e) {
             e.printStackTrace();

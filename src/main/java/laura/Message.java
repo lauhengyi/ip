@@ -8,7 +8,7 @@ public class Message {
      * Sends the Welcome Message for when the application begins
      */
     public static String welcome() {
-        return "Hello I'm Laura\n"
+        return "Hello I'm L.A.U.R.A\n"
                   + "What can I do for you?";
     }
 
