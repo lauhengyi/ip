@@ -11,7 +11,6 @@ import laura.exception.LauraException;
  */
 public class Date {
     private final LocalDate date;
-    /** The format that the date should be written in string */
     private static final DateTimeFormatter STRING_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /**
